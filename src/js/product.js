@@ -28,8 +28,12 @@ function getProductsData() {
 function addToCart(e) {
   const product = products.find((item) => item.Id === e.target.dataset.id);
   setLocalStorage("so-cart", product);
+
+  console.log(product)
 }
 
 getProductsData();
 // add listener to Add to Cart button
 document.getElementById("addToCart").addEventListener("click", addToCart);
+
+

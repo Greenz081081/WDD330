@@ -1,7 +1,7 @@
 
 
 let products = [];
-let carts = [];
+let cart = [];
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -30,8 +30,8 @@ function getProductsData() {
 // add to cart button event handler
 function addToCart(e) {
   const product = products.find((item) => item.Id === e.target.dataset.id);
-  carts.push(product);
-  setLocalStorage("so-cart", carts);
+  cart.push(product);
+  setLocalStorage("so-cart", cart);
 
   // console.log(product);
 }

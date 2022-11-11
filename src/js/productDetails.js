@@ -7,8 +7,8 @@ export default class productDetail  {
         this.dataSrc = dataSrc
     }
 
-    init() {
-
+    async init() {
+        const details = await this.dataSrc.getData();
     }
 
     addToCart() {

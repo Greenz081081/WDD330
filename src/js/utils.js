@@ -29,3 +29,11 @@ export function getParams(param){
 
   return product
 }
+
+export function renderListWithTemplate(template, parentElement, list, callback) {
+  list.forEach(prod => {
+      const clone = template.content.cloneNode(true)
+      const hydratedTemplate = callback(clone, product)
+      parentElement.appendChild(hydratedTemplate)
+  })
+} 

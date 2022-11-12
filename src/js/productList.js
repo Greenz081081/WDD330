@@ -13,13 +13,19 @@ export default class productList {
     renderList (list) {
         const template = document.querySelector("#product-card-template");
         list.forEach(product => {
-            const node = template.content.cloneNode(true);
-            this.listElement.appenaChild(node);
+            const clone = template.content.cloneNode(true);
+            const hydratedTemplate = this.prepareTemplate(clone, product);
+            this.listElement.appendChild(hydratedTemplate);
         })
     }
 
     prepareTemplate (template, product) {
         template.querySelector("a").href += product.Id;
+        template.querySelector("img").src = product.Image;
+        template.querySelector("img").alt += product.Name;
+        template.querySelector(".card__brand").textContent = product.Brand.Name;
+        template.querySelector(".card__name").textContent = product.NameWithoutBrand;
+        template.querySelector(".product-card__price").textContent += product.FinalPrice;
         return template;
     }
 }

@@ -1,8 +1,8 @@
-import productData from "./productData.js"
+import EternalServices from "./EternalServices.js"
 import productDetail from "./productDetails.js";
 import { getParams } from "./utils.js"
 
-const class_products  = new productData("tents")
+const class_products  = new EternalServices("tents")
 const productId = getParams('product');
 
 const product = new productDetail(productId, class_products);

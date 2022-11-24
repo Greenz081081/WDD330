@@ -219,3 +219,56 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.grid img {
+  width: 60%;
+}
+
+.products h2 {
+  text-align: center;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  
+}
+
+.checkout-form input{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid;
+}
+
+fieldset {
+  width: 400px;
+}
+
+fieldset ul li {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
+}
+
+fieldset ul li p {
+  display: inline;
+  margin-top: -2px;
+  grid-column: 3;
+}
+
+fieldset ul li label {
+  grid-column: 1/3;
+}

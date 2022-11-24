@@ -3,5 +3,3 @@ import { loadHeaderFooter } from "./utils.js";
 
 loadHeaderFooter();
 
-const list = new productList('tents')
-

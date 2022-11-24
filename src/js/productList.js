@@ -10,11 +10,10 @@ function convertToJson(res) {
   }
 
 export default class productList {
-    constructor (category,productList_render, dataSource) {
+    constructor (category,listElement, dataSource) {
         this.category = category
-        this.productList_render = productList_render
+        this.listElement = listElement
         this.dataSource = dataSource
-        this.path = `../js/${this.category}.json`
     }
     
     getData() {
@@ -22,9 +21,9 @@ export default class productList {
           .then(convertToJson).then((data) => data);
       }
     async init () {
-        const res = await this.dataSource.getData()
-
-        return res
+        const list = await this.dataSource.getData(this.category);
+        console.log (list)
+        return list
     }
 
     renderList (list){
@@ -34,8 +33,14 @@ export default class productList {
         renderListWithTemplate(template, this.listElement, this.prepareTemplate)
     }
 
-    prepareTemplate (template_clone, product) {
-        template_clone.querySelector('a').href += product.id
+    prepareTemplate (template, product) {
+      template.querySelector('a').href +=  product.Id;
+      template.querySelector('img').src = product.Images.PrimaryMedium;
+      template.querySelector('img').alt += product.Name;
+      template.querySelector('.card__brand').textContent = product.Brand.Name;
+      template.querySelector('.card__name').textContent = product.NameWithoutBrand;
+      template.querySelector('.product-card__price').textContent += product.FinalPrice; 
+      return template;
     }
 
 }

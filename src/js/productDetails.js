@@ -1,3 +1,4 @@
+import { getLocalStorage, setLocalStorage } from "./utils";
 
 
 export default class productDetail  {
@@ -8,12 +9,19 @@ export default class productDetail  {
     }
 
     async init() {
-        const details = await this.dataSrc.getData();
-        return details
+        cthis.product = await this.datasource.findProductById(this.product);
+        document.querySelector('main').innerHTML = tis.renderProductDetails()
+        document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
     }
 
     addToCart() {
-        setLocalStorage("so-cart", carts);
+        let cartContents = getLocalStorage('so-cart')
+        if(!cartContents){
+            cartContents = [];
+        }
+
+        cartContents.push(this.product);
+        setLocalStorage('so-cart', cartContents)
     }
 
     renderProductDetails() {

@@ -6,7 +6,7 @@ const class_products  = new productData("tents")
 const productId = getParams("product");
 
 
-console.log(productId)
+// console.log(productId)
 
 const product = new productDetail(productId, class_products);
 product.init();

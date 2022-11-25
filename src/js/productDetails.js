@@ -1,6 +1,7 @@
 import { getLocalStorage, setLocalStorage } from "./utils";
 
 
+
 export default class productDetail  {
     constructor(prodId, dataSrc) {
         this.prodId = prodId;
@@ -9,19 +10,19 @@ export default class productDetail  {
     }
 
     async init() {
-        cthis.product = await this.datasource.findProductById(this.product);
-        document.querySelector('main').innerHTML = tis.renderProductDetails()
-        document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
+        this.product = await this.dataSrc.findProductById(this.product);
+        document.querySelector("main").innerHTML = this.renderProductDetails()
+        document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
     }
 
     addToCart() {
-        let cartContents = getLocalStorage('so-cart')
+        let cartContents = getLocalStorage("so-car")
         if(!cartContents){
             cartContents = [];
         }
 
         cartContents.push(this.product);
-        setLocalStorage('so-cart', cartContents)
+        setLocalStorage("so-cart", cartContents)
     }
 
     renderProductDetails() {

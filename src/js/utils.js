@@ -40,7 +40,7 @@ export function getParams(param){
 export function renderListWithTemplate(template, parentElement, list, callback) {
   list.forEach(prod => {
       const clone = template.content.cloneNode(true)
-      const hydratedTemplate = callback(clone, product)
+      const hydratedTemplate = callback(clone, prod)
       parentElement.appendChild(hydratedTemplate)
   })
 } 
@@ -56,27 +56,27 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 export async function loadTemplate (path)  {
   const res = await fetch(path).then(convertToText)
 
-  const template = document.createElement('template')
+  const template = document.createElement("template")
   template.innerHTML = res
 
   return template
 }
 
 export async function loadHeaderFooter(){
-  const resHeader = await loadTemplate('./partial/header.html')
-  const resFooter = await loadTemplate('./partial/footer.html')
-  const header = document.getElementById('main-header')
-  const footer = document.getElementById('main-footer')
+  const resHeader = await loadTemplate("./partial/header.html")
+  const resFooter = await loadTemplate("./partial/footer.html")
+  const header = document.getElementById("main-header")
+  const footer = document.getElementById("main-footer")
 
   renderWithTemplate(resHeader, header)
   renderWithTemplate(resFooter, footer)
 }
 
 export async function loadHeaderFooterCart(){
-  const resHeader = await loadTemplate('../partial/header.html')
-  const resFooter = await loadTemplate('../partial/footer.html')
-  const header = document.getElementById('main-header')
-  const footer = document.getElementById('main-footer')
+  const resHeader = await loadTemplate("../partial/header.html")
+  const resFooter = await loadTemplate("../partial/footer.html")
+  const header = document.getElementById("main-header")
+  const footer = document.getElementById("main-footer")
 
   renderWithTemplate(resHeader, header)
   renderWithTemplate(resFooter, footer)

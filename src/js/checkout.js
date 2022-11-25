@@ -1,3 +1,3 @@
-import { loadHeaderFooterCart } from './utils.js';
+import { loadHeaderFooterCart } from "./utils.js";
 
 loadHeaderFooterCart();

@@ -1,10 +1,10 @@
-const baseURL = 'http://157.201.228.93:2992/';
+const baseURL = "http://157.201.228.93:2992/";
 // const baseURL = 'http://127.0.0.1:3000/';
 async function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error('Bad Response');
+    throw new Error("Bad Response");
   }
 }
 
@@ -14,11 +14,11 @@ export default class ExternalServices {
     // this.category = category;
     // this.path = `../json/${this.category}.json`;
   }
-  getData(category) {
+  async getData(category) {
     // instead we will pass the category we want in here when we need it.
-    return fetch(baseURL + `products/search/${category}`)
-      .then(convertToJson)
-      .then((data) => data.Result);
+    const res = await fetch(baseURL + `products/search/${category}`);
+    const data = await convertToJson(res);
+    return data.Result;
   }
   async findProductById(id) {
     //const products = await this.getData()
@@ -30,12 +30,12 @@ export default class ExternalServices {
   }
   async checkout(payload) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     };
-    return await fetch(baseURL + 'checkout/', options).then(convertToJson);
+    return await fetch(baseURL + "checkout/", options).then(convertToJson);
   }
 }

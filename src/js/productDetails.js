@@ -3,14 +3,14 @@ import { getLocalStorage, setLocalStorage } from "./utils";
 
 
 export default class productDetail  {
-    constructor(prodId, dataSrc) {
+    constructor(prodId, dataSource) {
         this.prodId = prodId;
         this.product = {};
-        this.dataSrc = dataSrc
+        this.dataSource = dataSource
     }
 
     async init() {
-        this.product = await this.dataSrc.findProductById(this.product);
+        this.product = await this.dataSource.findProductById(this.product);
         document.querySelector("main").innerHTML = this.renderProductDetails()
         document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
     }
@@ -30,7 +30,7 @@ export default class productDetail  {
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
         <img
           class="divider"
-          src="${this.product.Image}"
+          src="${this.product.Images.PrimaryLarge}"
           alt="${this.product.NameWithoutBrand}"
         />
         <p class="product-card__price">$${this.product.FinalPrice}</p>

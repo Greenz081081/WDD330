@@ -1,14 +1,5 @@
 import { renderListWithTemplate } from "./utils.js";
 
-
-// function convertToJson(res) {
-//     if (res.ok) {
-//       return res.json();
-//     } else {
-//       throw new Error("Bad Response");
-//     }
-//   }
-
 export default class productList {
     constructor (category,listElement, dataSource) {
         this.category = category
@@ -18,9 +9,8 @@ export default class productList {
     
     async init () {
         const list = await this.dataSource.getData(this.category);
-        this.renderList(list);
 
-        document.querySelector(".title").innerHTML = this.category;
+       this.renderList(list)
     }
 
     renderList (){

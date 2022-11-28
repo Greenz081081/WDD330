@@ -1,14 +1,14 @@
-import { getLocalStorage, setLocalStorage } from "./utils";
-
+import { getLocalStorage, setLocalStorage, loadHeaderFooter, alertMessage } from "./utils.js";
+loadHeaderFooter
 
 
 export default class productDetail  {
+  
     constructor(prodId, dataSource) {
         this.prodId = prodId;
         this.product = {};
         this.dataSource = dataSource
     }
-
     async init() {
         this.product = await this.dataSource.findProductById(this.product);
         document.querySelector("main").innerHTML = this.renderProductDetails()
@@ -23,6 +23,7 @@ export default class productDetail  {
 
         cartContents.push(this.product);
         setLocalStorage("so-cart", cartContents)
+        alertMessage(`${this.product.NameWithoutBrand} added to cart!`)
     }
 
     renderProductDetails() {

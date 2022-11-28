@@ -1,5 +1,6 @@
+import ExternalServices from "./EternalServices.js";
 import { renderListWithTemplate } from "./utils.js";
-
+// const dataSource = new ExternalServices()
 export default class productList {
     constructor (category,listElement, dataSource) {
         this.category = category
@@ -8,9 +9,12 @@ export default class productList {
     }
     
     async init () {
-        const list = await this.dataSource.getData(this.category);
-
+        const dataSource = new ExternalServices()
+        const list = await dataSource.getData(this.category);
+        console.log(list)
        this.renderList(list)
+
+       document.querySelector(".title").innerHTML = this.category;
     }
 
     renderList (){

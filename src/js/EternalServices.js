@@ -1,24 +1,25 @@
-const baseURL = "http://157.201.228.93:2992/";
-// const baseURL = 'http://127.0.0.1:3000/';
+const baseURL = "http://192.168.8.101:8080/";
+
 async function convertToJson(res) {
+  const data = await res.json()
   if (res.ok) {
-    return res.json();
+    return data;
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: jsonResponse };
+
   }
 }
 
 export default class ExternalServices {
   constructor() {
   }
-  async getData(category) {
-    return fetch(baseURL + `products/search/${category}`).then(convertToJson).then((data) => data.Result
-    )
+  getData(category) {
+    return fetch(baseURL + `products/search/${category}`).then(convertToJson).then((data) => data.Result)
   }
   async findProductById(id) {
     return await fetch(baseURL + `product/${id}`)
       .then(convertToJson)
-      .then((data) => data.Result);
+      .then((data) => console.log(data));
   }
   async checkout(payload) {
     const options = {

@@ -1,11 +1,11 @@
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
+// wrapper for querySelector...returns matching element
+function convertToText(res) {
+  if (res) {
+    return res.text();
   } else {
     throw new Error("Bad Response");
   }
 }
-// wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
@@ -37,34 +37,47 @@ export function getParams(param){
   return product
 }
 
-export function renderListWithTemplate (template, parent, list, callback) {
-  list.forEach(item => {
-    const clone = template.content.cloneNode(true);
-    const templateWithData = callback(clone, item);
-    parent.appenChild(templateWithData);
-  });
-}
+export function renderListWithTemplate(template, parentElement, list, callback) {
+  list.forEach(prod => {
+      const clone = template.content.cloneNode(true)
+      const hydratedTemplate = callback(clone, prod)
+      parentElement.appendChild(hydratedTemplate)
+  })
+} 
 
-export function renderWithTemplate (template, parent, data, callback) {
-  let clone = template.content.cloneNode(true);
-  if (callback) {
-  clone = callback(clone, data)
+export function renderWithTemplate(template, parentElement, data, callback) {
+    let clone = template.content.cloneNode(true)
+    parentElement.appendChild(clone)
+    if (callback) {
+      clone = callback(clone, data)
   }
-  parent.appenChild(clone);
+} 
+
+export async function loadTemplate (path)  {
+  const res = await fetch(path).then(convertToText)
+
+  const template = document.createElement("template")
+  template.innerHTML = res
+
+  return template
 }
 
-export async function loadTemplate (path) {
-  const providePath = await fetch(path).then(convertToJson);
-  const template = document.createElement("template");
-  template.innerHTML = providePath;
-  return template;
+export async function loadHeaderFooter(){
+  const resHeader = await loadTemplate("./partial/header.html")
+  const resFooter = await loadTemplate("./partial/footer.html")
+  const header = document.getElementById("main-header")
+  const footer = document.getElementById("main-footer")
+
+  renderWithTemplate(resHeader, header)
+  renderWithTemplate(resFooter, footer)
 }
 
-export async function loadHeaderFooter () {
-  const header = await loadTemplate("../partials/header.html");
-  const footer = await loadTemplate("../partials/footer.html");
-  const headerElement = document.getElementById("Main-header");
-  const footerElement = document.getElementById("main-footer");
-  renderWithTemplate(header, headerElement);
-  renderWithTemplate(footer, footerElement);
+export async function loadHeaderFooterCart(){
+  const resHeader = await loadTemplate("../partial/header.html")
+  const resFooter = await loadTemplate("../partial/footer.html")
+  const header = document.getElementById("main-header")
+  const footer = document.getElementById("main-footer")
+
+  renderWithTemplate(resHeader, header)
+  renderWithTemplate(resFooter, footer)
 }

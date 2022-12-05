@@ -1,6 +1,7 @@
 import productList from "./productList.js";
 import { loadHeaderFooter } from "./utils.js";
-import some from '../partial/header.html'
 loadHeaderFooter();
+const productListing = new productList()
+
 productList.init()
 
